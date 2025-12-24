@@ -138,6 +138,37 @@
         inset: 0;
         border: 1px solid black;
         z-index: 10;
+        font-size: 5px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .demo-sec5 {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin-block: 50px;
+    }
+
+    .demo-sec5 img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        inset: 0;
+        background-color: transparent;
+        z-index: 11;
     }
 </style>
 
@@ -182,6 +213,11 @@
     </div>
 
     <div class="main-curser"></div>
+
+    <div class="demo-sec5">
+        <div class="overlay"></div>
+        <img src="./img/demo-img.png" alt="">
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"
@@ -287,6 +323,32 @@
                 ease: "back.out(1.7)",
             })
         })
+
+        let imgStor = document.querySelector('.demo-sec5');
+        imgStor.addEventListener('mouseenter', (e) => {
+            let mousecontent = document.querySelector('.main-curser');
+            mousecontent.innerHTML = "View"
+            gsap.to(".main-curser", {
+                scale: 4,
+                duration: 0.8,
+                backgroundColor: "#ffffff97",
+                color: "white",
+                border: "1px solid transparent"
+            })
+        })
+
+        imgStor.addEventListener('mouseleave', (e) => {
+            let mousecontent = document.querySelector('.main-curser');
+            mousecontent.innerHTML = ""
+            gsap.to(".main-curser", {
+                scale: 1,
+                backgroundColor: "white",
+                border: "1px solid black",
+                color: "transparent",
+                duration: 1,
+            })
+        })
+
 
 
     </script>
