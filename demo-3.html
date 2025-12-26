@@ -39,6 +39,8 @@
         justify-content: space-between;
         padding: 40px 50px;
         color: white;
+        position: relative;
+        z-index: 2;
     }
 
     .main-menu {
@@ -53,6 +55,7 @@
         top: 0;
         right: 0;
         padding-left: 50px;
+        z-index: 10;
     }
 
     .main-menu ul {
@@ -82,12 +85,35 @@
         top: 20px;
         right: 20px;
         opacity: 0;
+        z-index: 1;
     }
 
     .closser svg {
         width: 20px;
         aspect-ratio: 1/1;
         height: auto;
+    }
+
+    .main-text {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h1 {
+        font-size: 110px;
+        color: white;
+        text-align: center;
+    }
+
+    .main-text span {
+        display: inline-block;
     }
 </style>
 
@@ -118,6 +144,10 @@
                 </svg>
             </div>
         </div>
+
+        <div class="main-text">
+            <h1>Varanasi</h1>
+        </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
     <script>
@@ -146,6 +176,41 @@
         closser.addEventListener("click", () => {
             tl.reverse()
         })
+
+        let storDiv = document.querySelector('.main-text h1');
+        let storH1 = storDiv.textContent;
+        let splideText = storH1.split('')
+        let hafeLent = splideText.length / 2
+        console.log(hafeLent);
+        let currentText = "";
+        splideText.forEach((val, index) => {
+            if (index < hafeLent) {
+                currentText += `<span class="a">${val}</span>`
+            }
+            else {
+                currentText += `<span class="b">${val}</span>`
+            }
+        })
+        console.log(currentText);
+
+        storDiv.innerHTML = currentText
+
+        gsap.from('.a', {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            delay: 0.5,
+            stagger: 0.28,
+        })
+
+        gsap.from('.b', {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            delay: 0.5,
+            stagger: -0.28,
+        })
+
     </script>
 </body>
 
